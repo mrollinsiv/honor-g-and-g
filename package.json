@@ -1,0 +1,35 @@
+{
+  "name": "honorgandg",
+  "version": "1.0.0",
+  "description": "Honor G and G",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://mrollinsiv@bitbucket.org/mrollinsiv/honorgandg.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/mrollinsiv/honorgandg#readme",
+  "dependencies": {
+    "koa": "^2.5.0",
+    "koa-nunjucks-async": "^1.0.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^4.0.2",
+    "nunjucks": "^3.1.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0",
+    "grunt": "^1.0.2",
+    "grunt-browserify": "^5.2.0",
+    "grunt-contrib-uglify": "^3.3.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-nunjucks": "^0.1.4",
+    "grunt-sass": "^2.1.0"
+  }
+}
