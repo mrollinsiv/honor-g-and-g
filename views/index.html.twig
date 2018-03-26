@@ -1,0 +1,16 @@
+{%- extends 'base.html.twig' -%}
+
+{% block body %}
+  <article class="main container">
+    <div class="row">
+      <div class="col-8">
+        {% for pic in instaPics %}
+          <div class="insta-pic" data-src="https://www.instagram.com/p/{{ pic }}/"></div>
+        {% endfor %}
+      </div>
+      <div class="col-4">
+        testing rail
+      </div>
+    </div>
+  </article>
+{% endblock %}
