@@ -1,8 +1,9 @@
 //We're using koa, so lets require it, (duh).
-var Koa = require('koa');
-var Router = require('koa-router');
-var nunjucks = require('koa-nunjucks-async');
-var serve = require('koa-static');
+const Koa = require('koa');
+const Router = require('koa-router');
+const nunjucks = require('koa-nunjucks-async');
+const serve = require('koa-static');
+const config = require('./config/config');
 
 //and initialize it with
 const app = new Koa();
@@ -10,10 +11,10 @@ const router = new Router();
 
 app.use(serve('./web'));
 
+// Send config data to the FE
 app.use(async (ctx,next) => {
-  ctx.state.globals = require('./config/config');
+  ctx.state.globals = config.public;
   ctx.state.instaPics = require('./data/instagram').images;
-  console.log(ctx.state);
   await next();
 });
 

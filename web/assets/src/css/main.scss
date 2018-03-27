@@ -1,2 +1,96 @@
-@import 'bootstrap';
-@import 'honorgandg';
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700');
+
+$base-font-size: 16;
+$base-font-family: 'Roboto Condensed', sans-serif;
+$clairvoyant: #590a5b;
+$dark-clairvoyant: #4e0851;
+$seance: #760e7a;
+$medium-red-violet: #b83881;
+$lola: #efe9ef;
+$white: #ffffff;
+
+
+// Calculate ems
+
+@function em($target, $base: $base-font-size) {
+  @return ($target/ $base) * 1em;
+}
+
+
+html {
+  height: 100%;
+  background: $white;
+}
+body {
+  background-color: $seance;
+  background-image:
+    radial-gradient(
+        circle at top right,
+        $medium-red-violet,
+        $seance 70%
+    );
+
+  header {
+    width: 100%;
+    filter: drop-shadow(2px 2px 2px $dark-clairvoyant);
+    height: em(64);
+    background-color: $lola;
+    border-bottom: 1px solid $clairvoyant;
+    color: $seance;
+
+    h1 {
+      font-family: $base-font-family;
+      font-size: em(30);
+      font-weight: 300;
+      margin: 0;
+      line-height: em(64, 30);
+
+      span {
+        font-weight: 700;
+      }
+    }
+
+    div.col-4 {
+      height: 100%;
+    }
+
+    a.btn {
+      height: em(50);
+      background-color: $seance;
+      background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjI2cHgiIGhlaWdodD0iMjZweCIgdmlld0JveD0iMCAwIDI2IDI2IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCAzLjguMyAoMjk4MDIpIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPgogICAgPHRpdGxlPkltcG9ydGVkIExheWVycyBDb3B5PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9IlBhZ2UtMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9Ikdyb3VwLTEwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTEuMDAwMDAwLCAtMTAuMDAwMDAwKSIgZmlsbD0iI0ZGRkZGRiI+CiAgICAgICAgICAgIDxnIGlkPSJSZWN0YW5nbGUtMi0rLURvbmF0ZS13aXRoLS0rLUpHX3doaXRlLTAxLUNvcHktNyI+CiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMzUuODkzMzE0LDIwLjE2MDc1NTggTDI3LjI3NTU4MTQsMjAuMTYwNzU1OCBMMjIuMjMzMTM5NSwyNS4yMTE2Mjc5IEwyOS4xNSwyNS4yMTE2Mjc5IEMyOC4yMzc3OTA3LDI3LjIyNzkwNyAyNi4yMTk3Njc0LDI4LjYzNDU5MyAyMy44NTQzNjA1LDI4LjYzNDU5MyBDMjAuNjcxMjIwOSwyOC42MzQ1OTMgMTguMDU2Njg2LDI2LjAzODA4MTQgMTguMDU2Njg2LDIyLjg0Nzk2NTEgQzE4LjA1NjY4NiwxOS42NDE4NjA1IDIwLjY3MTIyMDksMTcuMDQzNjA0NyAyMy44NTQzNjA1LDE3LjA0MzYwNDcgQzI1LjAyMjk2NTEsMTcuMDQzNjA0NyAyNi4xMDU1MjMzLDE3LjM4NDAxMTYgMjcuMDAzMTk3NywxNy45NzA5MzAyIEwzMS42NzcwMzQ5LDEzLjMwMzE5NzcgQzI5LjUzNTE3NDQsMTEuNTQ5NzA5MyAyNi44MTEzMzcyLDEwLjUgMjMuODQxMjc5MSwxMC41IEMxNy4wMzE5NzY3LDEwLjUgMTEuNSwxNi4wMjM4MzcyIDExLjUsMjIuODQ3OTY1MSBDMTEuNSwyOS42NTU4MTQgMTcuMDMxOTc2NywzNS4xODk1MzQ5IDIzLjg0MTI3OTEsMzUuMTg5NTM0OSBDMzAuNjU5MDExNiwzNS4xODk1MzQ5IDM2LjE4NzUsMjkuNjU1ODE0IDM2LjE4NzUsMjIuODQ3OTY1MSBDMzYuMTg3NSwyMS45MjQxMjc5IDM2LjA4MTY4NiwyMS4wMjk5NDE5IDM1Ljg5MzMxNCwyMC4xNjA3NTU4IiBpZD0iSW1wb3J0ZWQtTGF5ZXJzLUNvcHkiPjwvcGF0aD4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+);
+      background-repeat: no-repeat;
+      background-position: 10px center;
+      margin-top: em(10);
+      padding-left: em(50);
+      padding-top: em(5);
+      color: $white;
+      font-family: $base-font-family;
+      font-size: em(14);
+      font-weight: 300;
+      line-height: em(18, 14);
+
+      &:hover {
+        background-color: $medium-red-violet;
+      }
+
+      span {
+        font-size: em(16, 14);
+        font-weight: 700;
+      }
+    }
+  }
+
+  .main {
+    margin-top: em(64);
+  }
+
+  .insta-pic {
+    width: em(320);
+
+    iframe {
+      width: em(320) !important;
+      max-width: em(320) !important;
+      filter: drop-shadow(2px 2px 2px $dark-clairvoyant);
+    }
+  }
+}
