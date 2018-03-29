@@ -128,6 +128,8 @@ router.get('/', async ctx => {
     instaPics: instaPics.value
   });
 });
+// Redirect all traffic not to index to index
+router.redirect('/(.*)', '');
 
 //and we'll set up 2 routes, for our index and about me pages
 app.use(router.routes());
