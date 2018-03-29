@@ -54,6 +54,12 @@ module.exports = function(grunt) {
         cwd: 'web/assets/src/fonts',
         src: '**',
         dest: 'web/assets/dist/fonts',
+      },
+      images: {
+        expand: true,
+        cwd: 'web/assets/src/images',
+        src: '**',
+        dest: 'web/assets/dist/images',
       }
     },
     watch: {
