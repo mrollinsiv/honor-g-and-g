@@ -2,14 +2,85 @@
 
 {% block body %}
   <article class="main">
-    <div class="container">
-      <div class="row">
-        <div class="col">
+    <div class="totals">
+      <div class="container">
+        <div class="row justify-content-center counters">
+          <div class="col-10 col-md-auto text-center">
+            <h2>Total Miles Run</h2>
+            <p>{{ totalMiles }}</p>
+          </div>
+          <div class="col-10 col-md-auto text-center">
+            <h2>Donations</h2>
+            <p>{{ totalRaised }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="breakdown">
+        <div class="container">
+          <div class="row">
+            <div class="col-6 col-lg-3 order-2">
+              <div class="card races">
+                <div class="card-header text-center">
+                  Races
+                </div>
+                <ul class="list-group list-group-flush">
+                  {% for race in races %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{{ race.url }}" target="_blank">{{ race.name }}</a><span class="badge badge-primary badge-pill">{{ race.miles }}m</span></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-6 order-md-1 order-lg-2 details">
+              <div class="card">
+                <div class="card-body">
+                  <p>
+                    Welcome to <span class="honorgandg">#Honor<span>GandG</span></span>. We have setup this site to honor Grampy and Grams whom we lost last year to pancreatic cancer. During the next year we will run all of our races in support of <a href="//pancreaticcanceraction.org">Pancreatic Cancer Action</a> to raise awareness and funds to fight this disease. <a href="//pancreaticcanceraction.org">Pancreatic Cancer Action</a> focus' on early diagnosis of the disease in hopes to get patients into treatment as quick as possible.  Please join/follow/support us on this journey.
+                  </p>
+                  <p class="text-center">
+                    <a href="//widgets.justgiving.com/Button/Redirect?p=eyJUZXh0IjoiUGFuY3JlYXRpYyBDYW5jZXIgQWN0aW9uIiwiSWQiOiJlYTUwNDA4NC04Y2MwLTQ2NTktOTdmYS0zMzJlZmQ3NGNmOGUiLCJDaGFyaXR5SWQiOjE5MDAxNCwiU2l6ZSI6InMiLCJSZWZlcmVuY2UiOiJIb25vckdhbmRHIiwiVHlwZSI6IkNoYXJpdHlEb25hdGUifQ==" class="btn donate-btn text-right">Donate to<br /><span class="bold">Pancreatic Cancer Action</span></a>
+                  </p>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p class="text-center social-links">
+                          <a href="https://pancreaticcanceraction.org">Pancreatic Cancer Action</a>
+                        </p>
+                      </div>
+                      <div class="col-md-6">
+                        <p class="text-center social-links">
+                          <a href="https://twitter.com/OfficialPCA" class="twitter social-link" target="_blank"><img src="{{ globals.protocol }}{{ globals.host }}{{ globals.assetsRoot }}images/twitter.svg" /></a>
+                          <a href="https://www.facebook.com/PancreaticCancerAction" class="facebook social-link" target="_blank"><img src="{{ globals.protocol }}{{ globals.host }}{{ globals.assetsRoot }}images/facebook.svg" /></a>
+                          <a href="https://www.instagram.com/pancreatic_cancer_action/" class="instagram social-link" target="_blank"><img src="{{ globals.protocol }}{{ globals.host }}{{ globals.assetsRoot }}images/instagram.svg" /></a>
+                          <a href="https://www.youtube.com/user/PanAct" class="youtube social-link" target="_blank"><img src="{{ globals.protocol }}{{ globals.host }}{{ globals.assetsRoot }}images/youtube.svg" /></a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-lg-3 order-3">
+              <div class="card donations">
+                <div class="card-header text-center">
+                  Recent Donors
+                </div>
+                <ul class="list-group list-group-flush">
+                  {% for donation in donations %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">{{ donation.donorDisplayName }}<span class="badge badge-primary badge-pill">${{ donation.amount|round(2) }}</span></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="instagram-feed">
+      <div class="container-fluid">
+        <div class="row">
           <div class="d-flex flex-wrap justify-content-center">
-            {% for pic in instaPics %}
-
+            {% for pic in instaPics.images %}
               <div class="insta-pic m-2" data-src="https://www.instagram.com/p/{{ pic }}/"></div>
-
             {% endfor %}
           </div>
         </div>

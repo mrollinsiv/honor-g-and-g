@@ -18,7 +18,12 @@
     "koa-nunjucks-async": "^1.0.1",
     "koa-router": "^7.4.0",
     "koa-static": "^4.0.2",
-    "nunjucks": "^3.1.2"
+    "nunjucks": "^3.1.2",
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2",
+    "sequelize": "^4.37.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
