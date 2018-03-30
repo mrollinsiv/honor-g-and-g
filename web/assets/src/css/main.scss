@@ -164,6 +164,23 @@ body {
           margin: 0;
         }
 
+        .profile-pic {
+          margin-bottom: em(10);
+
+          img {
+            height: auto;
+            width: 100%;
+            max-width: em(300);
+          }
+
+          .card-body {
+            padding-top: em(5);
+            padding-bottom: em(5);
+            font-family: $header-font-family;
+            font-weight: 900;
+          }
+        }
+
         .social-links {
           a {
             font-size: em(30);
