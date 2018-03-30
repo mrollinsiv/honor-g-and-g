@@ -127,7 +127,7 @@ router.get('/', async ctx => {
     races: races.value,
     totalMiles: races.value.reduce((a, b) => +a + +b.miles, 0),
     instaPics: instaPics.value,
-    thankYou: typeof ctx.request.query.ty !== 'undefined' && ctx.request.query.ty == 1 ? true : false
+    thankYou: thankYou
   });
 });
 // Redirect all traffic not to index to index
