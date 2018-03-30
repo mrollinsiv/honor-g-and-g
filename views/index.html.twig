@@ -99,9 +99,9 @@
       <div class="container-fluid">
         <div class="row">
           <div class="d-flex flex-wrap justify-content-center">
-            {#{% for pic in instaPics.images %}#}
-              {#<div class="insta-pic m-2" data-src="https://www.instagram.com/p/{{ pic }}/"></div>#}
-            {#{% endfor %}#}
+            {% for pic in instaPics.images %}
+              <div class="insta-pic m-2" data-src="https://www.instagram.com/p/{{ pic }}/"></div>
+            {% endfor %}
           </div>
         </div>
       </div>
