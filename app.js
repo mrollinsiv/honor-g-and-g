@@ -57,13 +57,14 @@ app.use(nunjucks('views', nunjucksOptions));
 
 
 router.get('/', async ctx => {
+  let thankYou = typeof ctx.request.query.tyfyd !== 'undefined' && ctx.request.query.tyfyd == 1 ? true : false; // Flag if on response page, update donations
+
   // Get fundraising data
   let fundraisingData = await Data.findOne({where: {key: 'fundraising_data'}});
   if (!fundraisingData) {
     fundraisingData = await Data.create({key: 'fundraising_data'});
   }
-  if (!fundraisingData.value || fundraisingData.updated_at < Date.now() - (24 * 3600 * 1000)) {
-    console.log('update');
+  if (!fundraisingData.value || fundraisingData.updated_at < Date.now() - (24 * 3600 * 1000) || thankYou) {
     // Load data from JustGiving API
     let donationOptions = {
       uri: config.private.justGiving.uri + 'fundraising/pages/' + config.private.justGiving.shortname + '/donations',
@@ -125,7 +126,8 @@ router.get('/', async ctx => {
     }).split('.')[0],
     races: races.value,
     totalMiles: races.value.reduce((a, b) => +a + +b.miles, 0),
-    instaPics: instaPics.value
+    instaPics: instaPics.value,
+    thankYou: typeof ctx.request.query.ty !== 'undefined' && ctx.request.query.ty == 1 ? true : false
   });
 });
 // Redirect all traffic not to index to index

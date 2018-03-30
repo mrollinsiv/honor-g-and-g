@@ -25,7 +25,13 @@
                 </div>
                 <ul class="list-group list-group-flush">
                   {% for race in races %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{{ race.url }}" target="_blank">{{ race.name }}</a><span class="badge badge-primary badge-pill">{{ race.miles }}m</span></li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <p class="m-0">
+                        <a href="{{ race.url }}" target="_blank">{{ race.name }}</a><br />
+                        {{ race.date }}
+                      </p>
+                      <span class="badge badge-primary badge-pill">{{ race.miles }}m</span>
+                    </li>
                   {% endfor %}
                 </ul>
               </div>
@@ -57,7 +63,7 @@
                     </div>
                   </div>
                   <p class="text-center">
-                    <a href="//widgets.justgiving.com/Button/Redirect?p=eyJUZXh0IjoiUGFuY3JlYXRpYyBDYW5jZXIgQWN0aW9uIiwiSWQiOiJlYTUwNDA4NC04Y2MwLTQ2NTktOTdmYS0zMzJlZmQ3NGNmOGUiLCJDaGFyaXR5SWQiOjE5MDAxNCwiU2l6ZSI6InMiLCJSZWZlcmVuY2UiOiJIb25vckdhbmRHIiwiVHlwZSI6IkNoYXJpdHlEb25hdGUifQ==" class="btn donate-btn text-right">Donate to<br /><span class="bold">Pancreatic Cancer Action</span></a>
+                    <a href="http://link.justgiving.com/v1/fundraisingpage/donate/pageId/10840238?amount=10.00&currency=USD&reference=HnrGandG&exitUrl=http%3A%2F%2Fhonorgandg.com%3Ftyfyd%3D1%26jgDonationId%3DJUSTGIVING-DONATION-ID&message=In%20honor%20and%20memory%20of%20Alan%20Michael%20Morgan%20%22Grampy%22%20and%20Sandy%20Evans%20%22Grams%22" class="btn donate-btn text-right" target="_blank">Donate to<br /><span class="bold">Pancreatic Cancer Action</span></a>
                   </p>
                   <div class="container">
                     <div class="row">
@@ -99,9 +105,9 @@
       <div class="container-fluid">
         <div class="row">
           <div class="d-flex flex-wrap justify-content-center">
-            {% for pic in instaPics.images %}
-              <div class="insta-pic m-2" data-src="https://www.instagram.com/p/{{ pic }}/"></div>
-            {% endfor %}
+            {#{% for pic in instaPics.images %}#}
+              {#<div class="insta-pic m-2" data-src="https://www.instagram.com/p/{{ pic }}/"></div>#}
+            {#{% endfor %}#}
           </div>
         </div>
       </div>
