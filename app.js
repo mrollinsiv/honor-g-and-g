@@ -98,7 +98,7 @@ router.get('/', async ctx => {
           donation.usdAmount = donation.amount;
         }
       }
-      fundraisingData.update({value: {donations: donations.donations.slice(0, 10), totalRaised: fundraiser.grandTotalRaisedExcludingGiftAid || 0}});
+      fundraisingData.update({value: {donations: donations.donations.slice(0, 20), totalRaised: fundraiser.grandTotalRaisedExcludingGiftAid || 0}});
     } catch(error) {
       if (!fundraisingData.value) {
         // could not load
