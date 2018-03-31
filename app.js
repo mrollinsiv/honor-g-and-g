@@ -103,8 +103,7 @@ router.get('/', async ctx => {
     } catch(error) {
       if (!fundraisingData.value) {
         // could not load
-        donations = {donations: []};
-        fundraiser = {};
+        fundraisingData.value = {donations: [], totalRaised: 0};
       }
     }
   }
