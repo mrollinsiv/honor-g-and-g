@@ -109,6 +109,17 @@ router.get('/', async ctx => {
     }
   }
 
+  // If on thank you page, now redirect home and remove query string
+  if (thankYou) {
+    var expires = new Date();
+    expires.setTime(expires.getTime()+(60 * 1000));
+    ctx.cookies.set('thankYou', true, {
+      expires: expires,
+      httpOnly: false
+    });
+    ctx.redirect('/');
+  }
+
   // Get race data
   let races = await Data.findOne({where: {key: 'races'}});
   if (!races) {
