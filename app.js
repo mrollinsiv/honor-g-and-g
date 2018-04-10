@@ -90,20 +90,11 @@ router.get('/', async ctx => {
       donations = await request(donationOptions);
       fundraiser = await request(fundraiserOptions);
 
-      // Loop over data and convert GBP to USD
-      for (donation in donations) {
-        if (donation.donorLocalCurrencyCode == 'GBP') {
-          donation.usdAmount = parseFloat(donation.amount) * 1.41;
-        }
-        else {
-          donation.usdAmount = donation.amount;
-        }
-      }
-      fundraisingData.update({value: {donations: donations.donations.slice(0, 20), totalRaised: fundraiser.grandTotalRaisedExcludingGiftAid || 0}});
+      fundraisingData.update({value: {donors: donations.donations.slice(0, 20).map(a => a.donorDisplayName), totalRaised: fundraiser.grandTotalRaisedExcludingGiftAid * 1.41 || 0}});
     } catch(error) {
       if (!fundraisingData.value) {
         // could not load
-        fundraisingData.value = {donations: [], totalRaised: 0};
+        fundraisingData.value = {donors: [], totalRaised: 0};
       }
     }
   }
@@ -129,13 +120,13 @@ router.get('/', async ctx => {
   let instaPics = await Data.findOne({where: {key: 'insta_pics'}});
 
   await ctx.render('index', {
-    donations: fundraisingData.value.donations,
+    donors: fundraisingData.value.donors,
     totalRaised: parseInt(fundraisingData.value.totalRaised).toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD'
     }).split('.')[0],
     races: races.value,
-    totalMiles: races.value.reduce((a, b) => +a + +b.miles, 0),
+    totalMiles: races.value.completedRaces ? races.value.completedRaces.reduce((a, b) => +a + +b.miles, 0) : 0,
     instaPics: instaPics.value,
     thankYou: thankYou
   });
