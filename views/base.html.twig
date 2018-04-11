@@ -18,8 +18,10 @@
   <meta name="robots" content="noindex, nofollow">
   <meta property="og:title" content="#HonorGandG" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="http://honorgandg.org" />
-  <meta property="og:image" content="http://honorgandg.org/assets/dist/images/social-og.png" />
+  <meta property="og:url" content="{{ globals.protocol }}{{ globals.host }}" />
+  <meta property="og:image" content="{{ globals.protocol }}{{ globals.host }}{{ globals.assetsRoot }}images/social-og.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ globals.protocol }}{{ globals.host }}{{ globals.assetsRoot }}images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ globals.protocol }}{{ globals.host }}{{ globals.assetsRoot }}images/favicon-16x16.png">
 </head>
 <body>
   {% include 'header.html.twig' %}
