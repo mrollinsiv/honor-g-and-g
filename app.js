@@ -64,7 +64,8 @@ router.get('/', async ctx => {
   if (!fundraisingData) {
     fundraisingData = await Data.create({key: 'fundraising_data'});
   }
-  if (!fundraisingData.value || fundraisingData.updated_at < Date.now() - (24 * 3600 * 1000) || thankYou) {
+
+  if (!fundraisingData.value || fundraisingData.updated_at < Date.now() - (300 * 1000) || thankYou) {  // Update every 5 minutes
     // Load data from JustGiving API
     let donationOptions = {
       uri: config.private.justGiving.uri + 'fundraising/pages/' + config.private.justGiving.shortname + '/donations',
