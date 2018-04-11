@@ -122,10 +122,10 @@ router.get('/', async ctx => {
 
   await ctx.render('index', {
     donors: fundraisingData.value.donors,
-    totalRaised: parseInt(fundraisingData.value.totalRaised).toLocaleString('en-US', {
+    totalRaised: parseFloat(fundraisingData.value.totalRaised).toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD'
-    }).split('.')[0],
+    }),
     races: races.value,
     totalMiles: races.value.completedRaces ? races.value.completedRaces.reduce((a, b) => +a + +b.miles, 0) : 0,
     instaPics: instaPics.value,
