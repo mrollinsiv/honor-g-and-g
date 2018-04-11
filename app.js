@@ -90,7 +90,7 @@ router.get('/', async ctx => {
       donations = await request(donationOptions);
       fundraiser = await request(fundraiserOptions);
 
-      fundraisingData.update({value: {donors: donations.donations.slice(0, 20).map(a => a.donorDisplayName), totalRaised: fundraiser.grandTotalRaisedExcludingGiftAid * 1.41 || 0}});
+      fundraisingData.update({value: {donors: donations.donations.slice(0, 20).map(a => a.donorDisplayName), totalRaised: fundraiser.grandTotalRaisedExcludingGiftAid || 0}});
     } catch(error) {
       if (!fundraisingData.value) {
         // could not load

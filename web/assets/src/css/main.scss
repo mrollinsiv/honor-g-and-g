@@ -270,5 +270,10 @@ body {
 
   .thank-you-modal {
     color: black;
+
+    sub {
+      font-size: em(10);
+      line-height: em(12, 10);
+    }
   }
 }
