@@ -1,0 +1,10 @@
+<div class="card donations">
+  <div class="card-header text-center">
+    Recent Donors
+  </div>
+  <ul class="list-group list-group-flush">
+    {% for donor in donors %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">{{ donor }}</li>
+    {% endfor %}
+  </ul>
+</div>

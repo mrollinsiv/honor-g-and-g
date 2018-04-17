@@ -5,11 +5,11 @@
     <div class="totals">
       <div class="container">
         <div class="row justify-content-center counters">
-          <div class="col-10 col-md-auto text-center">
+          <div class="col-auto text-center">
             <h2>Total Miles Run</h2>
             <p>{{ totalMiles }}</p>
           </div>
-          <div class="col-10 col-md-auto text-center">
+          <div class="col-auto text-center">
             <h2>Donations</h2>
             <p>{{ totalRaised }}</p>
           </div>
@@ -19,39 +19,9 @@
         <div class="container">
           <div class="row">
             <div class="col-6 col-lg-3 order-2">
-              <div class="card races">
-                <div class="card-header text-center">
-                  Completed Races
-                </div>
-                <ul class="list-group list-group-flush">
-                  {% for race in races.completedRaces %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      <p class="m-0">
-                        <a href="{{ race.url }}" target="_blank">{{ race.name }}</a><br />
-                        {{ race.date }}
-                      </p>
-                      <span class="badge badge-primary badge-pill">{{ race.miles }}m</span>
-                    </li>
-                  {% endfor %}
-                </ul>
-              </div>
+              {% include "partials/_previous_races.html.twig" %}
               <br />
-              <div class="card races">
-                <div class="card-header text-center">
-                  Upcoming Races
-                </div>
-                <ul class="list-group list-group-flush">
-                  {% for race in races.upcomingRaces %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      <p class="m-0">
-                        <a href="{{ race.url }}" target="_blank">{{ race.name }}</a><br />
-                        {{ race.date }}
-                      </p>
-                      <span class="badge badge-primary badge-pill">{{ race.miles }}m</span>
-                    </li>
-                  {% endfor %}
-                </ul>
-              </div>
+              {% include "partials/_upcoming_races.html.twig" %}
             </div>
             <div class="col-md-12 col-lg-6 order-md-1 order-lg-2 p-md-0 details">
               <div class="card">
@@ -110,31 +80,12 @@
               </div>
             </div>
             <div class="col-6 col-lg-3 order-3">
-              <div class="card donations">
-                <div class="card-header text-center">
-                  Recent Donors
-                </div>
-                <ul class="list-group list-group-flush">
-                  {% for donor in donors %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">{{ donor }}</li>
-                  {% endfor %}
-                </ul>
-              </div>
+              {% include "partials/_donors.html.twig" %}
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="instagram-feed">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="d-flex flex-wrap justify-content-center">
-            {% for pic in instaPics.images %}
-              <div class="insta-pic m-2" data-src="https://www.instagram.com/p/{{ pic }}/"></div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    </div>
+    {% include "partials/_instagram.html.twig" %}
   </article>
 {% endblock %}

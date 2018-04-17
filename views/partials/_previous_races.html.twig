@@ -1,0 +1,16 @@
+<div class="card races">
+  <div class="card-header text-center">
+    Completed Races
+  </div>
+  <ul class="list-group list-group-flush">
+    {% for race in races.completedRaces %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <p class="m-0">
+          <a href="{{ race.url }}" target="_blank">{{ race.name }}</a><br />
+          {{ race.date }}
+        </p>
+        <span class="badge badge-primary badge-pill">{{ race.miles }}m</span>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
