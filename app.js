@@ -117,6 +117,18 @@ router.get('/', async ctx => {
     races = await Data.create({key: 'races'});
   }
 
+  var completedRaces = [],
+    upcomingRaces = [];
+  // Races are deemed complete at 10am EST
+  races.value.forEach(function(race) {
+     var raceDate = new Date(Date.parse(race.date) + (60 * 10 * 1000) + (60 * 4 * 1000));  // Make it 10am UTC and then add 4 hrs to get 10am EST
+     if (raceDate < Date.now()) {
+        completedRaces.push(race);
+     } else {
+       upcomingRaces.push(race);
+     }
+  });
+
   // Get instagram pics
   let instaPics = await Data.findOne({where: {key: 'insta_pics'}});
 
@@ -126,8 +138,11 @@ router.get('/', async ctx => {
       style: 'currency',
       currency: 'USD'
     }),
-    races: races.value,
-    totalMiles: races.value.completedRaces ? races.value.completedRaces.reduce((a, b) => +a + +b.miles, 0) : 0,
+    races: {
+      completedRaces: completedRaces,
+      upcomingRaces: upcomingRaces
+    },
+    totalMiles: completedRaces ? completedRaces.reduce((a, b) => +a + +b.miles, 0) : 0,
     instaPics: instaPics.value,
     thankYou: thankYou
   });
