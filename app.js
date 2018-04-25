@@ -6,6 +6,8 @@ const serve = require('koa-static');
 const config = require('./config/config');
 const dbConfig = require('./config/db');
 const request = require('request-promise');
+const https = require('https');
+const fs = require('fs');
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
   host: dbConfig.host,
@@ -147,6 +149,16 @@ router.get('/', async ctx => {
     thankYou: thankYou
   });
 });
+
+// Redirect to HTTPS
+app.use(async (ctx, next) => {
+  if (!ctx.secure) {
+    var href = ctx.href.replace('http:', 'https:').replace(':3000', ':3001');
+    ctx.redirect(href);
+  }
+  await next();
+});
+
 // Redirect all traffic not to index to index
 router.redirect('/(.*)', '');
 
@@ -154,5 +166,33 @@ router.redirect('/(.*)', '');
 app.use(router.routes());
 
 //and then give it a port to listen for
+
+//HTTPS
+var listenHttpsPort = 3001;
+try {
+  var serviceKey = fs.readFileSync(config.private.key, { encoding: 'utf8' });
+  var certificate = fs.readFileSync(config.private.cert, { encoding: 'utf8' });
+} catch (e) {
+  if (e.code !== 'ENOENT') {
+    throw e;
+  }
+}
+
+if (certificate && serviceKey) {
+  createServer(serviceKey, certificate, listenHttpsPort);
+} else {
+  const pem = require('pem');
+  pem.createCertificate({selfSigned:true}, function(err, keys){
+    fs.writeFileSync(config.private.key, keys.serviceKey);
+    fs.writeFileSync(config.private.cert, keys.certificate);
+    createServer(keys.serviceKey, keys.certificate, listenHttpsPort)
+  });
+}
+
+//create https server using serviceKey, certificate, and port
+function createServer(key, cert, port) {
+  https.createServer({key: key, cert: cert}, app.callback()).listen(port);
+}
+
 app.listen(3000);
 console.log('Koa listening on port 3000');

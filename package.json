@@ -36,6 +36,7 @@
     "grunt-contrib-uglify": "^3.3.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-nunjucks": "^0.1.4",
-    "grunt-sass": "^2.1.0"
+    "grunt-sass": "^2.1.0",
+    "pem": "^1.12.5"
   }
 }
