@@ -123,7 +123,7 @@ router.get('/', async ctx => {
     upcomingRaces = [];
   // Races are deemed complete at 10am EST
   races.value.forEach(function(race) {
-     var raceDate = new Date(Date.parse(race.date) + (60 * 10 * 1000) + (60 * 4 * 1000));  // Make it 10am UTC and then add 4 hrs to get 10am EST
+     var raceDate = new Date(Date.parse(race.date) + (60 * 12 * 1000) + (60 * 4 * 1000));  // Make it 10am UTC and then add 4 hrs to get 10am EST
      if (raceDate < Date.now()) {
         completedRaces.push(race);
      } else {
