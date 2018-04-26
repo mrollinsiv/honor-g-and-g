@@ -4,6 +4,7 @@
   "description": "Honor G and G",
   "main": "app.js",
   "scripts": {
+    "start": "NODE_ENV=development nodemon -e js,twig,json,html app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
