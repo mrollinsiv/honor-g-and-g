@@ -133,6 +133,9 @@ router.get('/', async ctx => {
 
   // Get instagram pics
   let instaPics = await Data.findOne({where: {key: 'insta_pics'}});
+  let totalMiles = completedRaces ? completedRaces.reduce(function(a, b) {
+    return {"miles": a.miles + b.miles};
+  }): 0;
 
   await ctx.render('index', {
     donors: fundraisingData.value.donors,
@@ -144,7 +147,7 @@ router.get('/', async ctx => {
       completedRaces: completedRaces,
       upcomingRaces: upcomingRaces
     },
-    totalMiles: completedRaces ? completedRaces.reduce((a, b) => +a + +b.miles, 0) : 0,
+    totalMiles: totalMiles.miles.toFixed(1),
     instaPics: instaPics.value,
     thankYou: thankYou
   });
