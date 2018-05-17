@@ -21,7 +21,6 @@ class HomeController {
 
     // Load race data from DB
     const raceData = await HomeController.getRaceData();
-    console.log(raceData);
 
     // Get Instagram pics
     const instaPics = await db.Data.findOne({
