@@ -1,28 +1,28 @@
 <html>
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ globals.googleAnalytics }}"></script>
+  <!-- global.public site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ globals.public.googleAnalytics }}"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', '{{ globals.googleAnalytics }}');
+    gtag('config', '{{ globals.public.googleAnalytics }}');
   </script>
 
-  <title>{{ globals.title }}</title>
+  <title>{{ globals.public.title }}</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="{{ globals.protocol }}{{ globals.host }}{{ globals.assetsRoot }}css/main.css">
+  <link rel="stylesheet" href="{{ globals.public.protocol }}{{ globals.public.host }}{{ globals.public.assetsRoot }}css/main.css">
   <script src="https://platform.instagram.com/en_US/embeds.js" async defer></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <meta property="og:title" content="#HonorGandG" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="{{ globals.protocol }}{{ globals.host }}" />
-  <meta property="og:image" content="{{ globals.protocol }}{{ globals.host }}{{ globals.assetsRoot }}images/social-og.png" />
+  <meta property="og:url" content="{{ globals.public.protocol }}{{ globals.public.host }}" />
+  <meta property="og:image" content="{{ globals.public.protocol }}{{ globals.public.host }}{{ globals.public.assetsRoot }}images/social-og.png" />
   <meta property="og:description" content="Welcome to #HonorGandG. We are thrilled that you are checking out our site, developed (with love) in honor Grampy and Grams, who we lost last year to pancreatic cancer. We have pledged to run in their honor throughout this year supporting Pancreatic Cancer Action." />
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ globals.protocol }}{{ globals.host }}{{ globals.assetsRoot }}images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ globals.protocol }}{{ globals.host }}{{ globals.assetsRoot }}images/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ globals.public.protocol }}{{ globals.public.host }}{{ globals.public.assetsRoot }}images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ globals.public.protocol }}{{ globals.public.host }}{{ globals.public.assetsRoot }}images/favicon-16x16.png">
 </head>
 <body>
   {% include 'header.html.twig' %}

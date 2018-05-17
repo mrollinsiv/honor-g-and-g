@@ -1,0 +1,16 @@
+{
+  "production": {
+    "justGiving": {
+      "apiKey": ""
+    },
+    "key": "",
+    "cert": ""
+  },
+  "development": {
+    "justGiving": {
+      "apiKey": ""
+    },
+    "key": "",
+    "cert": ""
+  }
+}

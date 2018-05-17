@@ -1,0 +1,24 @@
+{
+  "production": {
+    "title": "#HonorGandG | Support Pancreatic Cancer Action",
+    "protocol": "https://",
+    "host": "honorgandg.org",
+    "assetsRoot": "/assets/dist/",
+    "googleAnalytics": "UA-11935225-4",
+    "justGiving": {
+      "shortname": "HonorGandG",
+      "uri": "https://api.justgiving.com/v1/"
+    }
+  },
+  "development": {
+    "title": "#HonorGandG | Support Pancreatic Cancer Action",
+    "protocol": "https://",
+    "host": "honorgandg.loc:3001",
+    "assetsRoot": "/assets/dist/",
+    "googleAnalytics": "UA-11935225-4",
+    "justGiving": {
+      "shortname": "HonorGandG",
+      "uri": "https://api.justgiving.com/v1/"
+    }
+  }
+}
