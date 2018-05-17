@@ -1,5 +1,3 @@
-'use strict';
-
 // Imports
 const Koa = require('koa');
 const nunjucks = require('koa-nunjucks-async');
@@ -19,7 +17,7 @@ const homeRoutes = require('./routes/home');
 const app = new Koa();
 const router = new Router();
 const nunjucksOptions = {
-  ext: '.html.twig'
+  ext: '.html.twig',
 };
 
 // Load other middlewares...
@@ -27,7 +25,7 @@ const nunjucksOptions = {
 // Redirect to HTTPS
 app.use(async (ctx, next) => {
   if (!ctx.secure) {
-    var href = ctx.href.replace('http:', 'https:').replace(':3000', ':3001');
+    const href = ctx.href.replace('http:', 'https:').replace(':3000', ':3001');
     ctx.redirect(href);
   }
   return next();
@@ -37,10 +35,10 @@ app.use(async (ctx, next) => {
 app.use(serve('./web'));
 
 // Send config data to middleware
-app.use(async (ctx,next) => {
+app.use(async (ctx, next) => {
   ctx.state.globals = {
     public: publicConfig,
-    private: privateConfig
+    private: privateConfig,
   };
   return next();
 });
@@ -52,14 +50,25 @@ app.use(nunjucks('views', nunjucksOptions));
 // Redirect all traffic not to index to index
 router.redirect('/(.*)', '');
 
-//Routes
+// Routes
 app.use(homeRoutes.routes());
 
 // HTTPS
-var listenHttpsPort = 3001;
+const listenHttpsPort = 3001;
+let serviceKey = null;
+let certificate = null;
+
+// Create https server using serviceKey, certificate, and port
+function createServer(key, cert, port) {
+  https.createServer({
+    key,
+    cert,
+  }, app.callback()).listen(port);
+}
+
 try {
-  var serviceKey = fs.readFileSync(privateConfig.key, { encoding: 'utf8' });
-  var certificate = fs.readFileSync(privateConfig.cert, { encoding: 'utf8' });
+  serviceKey = fs.readFileSync(privateConfig.key, { encoding: 'utf8' });
+  certificate = fs.readFileSync(privateConfig.cert, { encoding: 'utf8' });
 } catch (e) {
   if (e.code !== 'ENOENT') {
     throw e;
@@ -68,18 +77,13 @@ try {
 
 if (certificate && serviceKey) {
   createServer(serviceKey, certificate, listenHttpsPort);
-} else {
-  const pem = require('pem');
-  pem.createCertificate({selfSigned:true}, function(err, keys){
+} else if (process.env.NODE_ENV === 'development') {
+  const pem = require('pem'); // eslint-disable-line
+  pem.createCertificate({ selfSigned: true }, (err, keys) => {
     fs.writeFileSync(privateConfig.key, keys.serviceKey);
     fs.writeFileSync(privateConfig.cert, keys.certificate);
-    createServer(keys.serviceKey, keys.certificate, listenHttpsPort)
+    createServer(keys.serviceKey, keys.certificate, listenHttpsPort);
   });
-}
-
-//create https server using serviceKey, certificate, and port
-function createServer(key, cert, port) {
-  https.createServer({key: key, cert: cert}, app.callback()).listen(port);
 }
 
 app.listen(3000);

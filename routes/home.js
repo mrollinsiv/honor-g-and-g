@@ -6,7 +6,7 @@ const router = new Router();
 
 const homeController = new HomeController();
 
-router.get('/', async (ctx, next) => {
+router.get('/', async (ctx) => {
   await homeController.index(ctx);
 });
 

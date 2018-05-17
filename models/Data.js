@@ -1,21 +1,21 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define('Data', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
     },
     key: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
     },
     value: {
-      type: DataTypes.JSONB
-    }
+      type: DataTypes.JSONB,
+    },
   }, {
     timestamps: true,
     freezeTableName: true,
     tableName: 'data',
-    underscored: true
+    underscored: true,
   });
 }

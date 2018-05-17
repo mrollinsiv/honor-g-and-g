@@ -6,22 +6,20 @@ const dbConfig = require('../config/db');
 const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
   host: dbConfig.host,
   dialect: dbConfig.adapter,
-  logging: false
+  logging: false,
 });
 
-var db = {};
+const db = {};
 fs
-  .readdirSync(__dirname + '/../models')
-  .filter(function(file) {
-    return (file.indexOf(".") !== 0) && (file !== "index.js");
-  })
-  .forEach(function(file) {
-    var model = sequelize.import(path.join(__dirname + '/../models', file));
+  .readdirSync(`${__dirname}/../models`)
+  .filter((file) => (file.indexOf('.') !== 0) && (file !== 'index.js'))
+  .forEach((file) => {
+    const model = sequelize.import(path.join(`${__dirname}/../models`, file));
     db[model.name] = model;
   });
 
-Object.keys(db).forEach(function(modelName) {
-  if ("associate" in db[modelName]) {
+Object.keys(db).forEach((modelName) => {
+  if ('associate' in db[modelName]) {
     db[modelName].associate(db);
   }
 });
