@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = function Data(sequelize, DataTypes) {
   return sequelize.define('Data', {
     id: {
       type: DataTypes.INTEGER,
@@ -18,4 +18,5 @@ module.exports = function (sequelize, DataTypes) {
     tableName: 'data',
     underscored: true,
   });
-}
+};
+
