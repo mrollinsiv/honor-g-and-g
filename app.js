@@ -10,7 +10,7 @@ const Router = require('koa-router');
 
 // Constants
 const publicConfig = require('./config/globals')[process.env.NODE_ENV];
-const privateConfig = require('./config/private')[process.env.NODE_ENV];
+const privateConfig = require('./config/private');
 
 // Routes
 const homeRoutes = require('./routes/home');

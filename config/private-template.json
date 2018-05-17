@@ -1,16 +1,7 @@
 {
-  "production": {
-    "justGiving": {
-      "apiKey": ""
-    },
-    "key": "",
-    "cert": ""
+  "justGiving": {
+    "apiKey": ""
   },
-  "development": {
-    "justGiving": {
-      "apiKey": ""
-    },
-    "key": "",
-    "cert": ""
-  }
+  "key": "",
+  "cert": ""
 }
