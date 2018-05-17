@@ -4,13 +4,13 @@
 const Koa = require('koa');
 const nunjucks = require('koa-nunjucks-async');
 const serve = require('koa-static');
-const configSettings = require('./config/config');
 const https = require('https');
 const fs = require('fs');
 const Router = require('koa-router');
 
 // Constants
-const config = configSettings[process.env.NODE_ENV];
+const publicConfig = require('./config/globals')[process.env.NODE_ENV];
+const privateConfig = require('./config/private');
 
 // Routes
 const homeRoutes = require('./routes/home');
@@ -38,7 +38,10 @@ app.use(serve('./web'));
 
 // Send config data to middleware
 app.use(async (ctx,next) => {
-  ctx.state.globals = config;
+  ctx.state.globals = {
+    public: publicConfig,
+    private: privateConfig
+  };
   return next();
 });
 
@@ -55,8 +58,8 @@ app.use(homeRoutes.routes());
 // HTTPS
 var listenHttpsPort = 3001;
 try {
-  var serviceKey = fs.readFileSync(config.key, { encoding: 'utf8' });
-  var certificate = fs.readFileSync(config.cert, { encoding: 'utf8' });
+  var serviceKey = fs.readFileSync(privateConfig.key, { encoding: 'utf8' });
+  var certificate = fs.readFileSync(privateConfig.cert, { encoding: 'utf8' });
 } catch (e) {
   if (e.code !== 'ENOENT') {
     throw e;
@@ -68,8 +71,8 @@ if (certificate && serviceKey) {
 } else {
   const pem = require('pem');
   pem.createCertificate({selfSigned:true}, function(err, keys){
-    fs.writeFileSync(config.private.key, keys.serviceKey);
-    fs.writeFileSync(config.private.cert, keys.certificate);
+    fs.writeFileSync(privateConfig.key, keys.serviceKey);
+    fs.writeFileSync(privateConfig.cert, keys.certificate);
     createServer(keys.serviceKey, keys.certificate, listenHttpsPort)
   });
 }

@@ -84,19 +84,19 @@ class HomeController {
     if (!fundraisingData.value || fundraisingData.updated_at < Date.now() - (300 * 1000) || thankYou) {  // Update every 5 minutes
       // Load data from JustGiving API
       let donationOptions = {
-        uri: ctx.state.globals.justGiving.uri + 'fundraising/pages/' + ctx.state.globals.justGiving.shortname + '/donations',
+        uri: ctx.state.globals.public.justGiving.uri + 'fundraising/pages/' + ctx.state.globals.public.justGiving.shortname + '/donations',
         headers: {
           'Content-type': 'application/json',
-          'x-api-key': ctx.state.globals.justGiving.apiKey
+          'x-api-key': ctx.state.globals.private.justGiving.apiKey
         },
         json: true
       };
 
       let fundraiserOptions = {
-        uri: ctx.state.globals.justGiving.uri + 'fundraising/pages/' + ctx.state.globals.justGiving.shortname,
+        uri: ctx.state.globals.public.justGiving.uri + 'fundraising/pages/' + ctx.state.globals.public.justGiving.shortname,
         headers: {
           'Content-type': 'application/json',
-          'x-api-key': ctx.state.globals.justGiving.apiKey
+          'x-api-key': ctx.state.globals.private.justGiving.apiKey
         },
         json: true
       };
