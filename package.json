@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=development nodemon -e js,twig,json,html app",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "No Tests",
     "lint": "eslint **/*.js",
     "pretest": "npm run lint"
   },
