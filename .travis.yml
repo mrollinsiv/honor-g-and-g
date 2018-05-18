@@ -6,4 +6,4 @@ cache:
     - node_modules
 sudo: false
 before_script:
-  - echo -e "{\"justGiving\":{\"apiKey\":\"$JUST_GIVING_API\"}}" >> ./mrollinsiv/honor-g-and-g/config/private.json
+  - echo -e "{\"justGiving\":{\"apiKey\":\"$JUST_GIVING_API\"}}" >> /home/travis/build/mrollinsiv/honor-g-and-g/config/private.json
