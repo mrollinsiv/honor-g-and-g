@@ -84,7 +84,7 @@ class HomeController {
     }
 
     // Check if we need fresh data from JustGiving API
-    if (!fundraisingData.value || fundraisingData.updated_at < Date.now() - (300 * 1000) || thankYou) { // Update every 5 minutes
+    if (!Object.getOwnPropertyNames(fundraisingData.value).length || fundraisingData.updated_at < Date.now() - (300 * 1000) || thankYou) { // Update every 5 minutes
       // Load data from JustGiving API
       const donationOptions = {
         uri: `${ctx.state.globals.public.justGiving.uri}fundraising/pages/${ctx.state.globals.public.justGiving.shortname}/donations`,
