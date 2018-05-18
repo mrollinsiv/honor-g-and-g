@@ -39,7 +39,7 @@ class HomeController {
         completedRaces: raceData.completedRaces,
         upcomingRaces: raceData.upcomingRaces,
       },
-      totalMiles: raceData.totalMiles.miles.toFixed(1),
+      totalMiles: raceData.totalMiles.miles ? raceData.totalMiles.miles.toFixed(1) : 0,
       instaPics: instaPics.value,
       thankYou,
     });
@@ -53,7 +53,7 @@ class HomeController {
     // Get race data
     let races = await db.Data.findOne({ where: { key: 'races' } });
     if (!races) {
-      races = await db.Data.create({ key: 'races' });
+      races = await db.Data.create({ key: 'races', value: [] });
     }
 
     // Races are deemed complete at 10am EST
@@ -67,7 +67,7 @@ class HomeController {
     });
 
     // Reduce the completed races to generate the total mileage
-    const totalMiles = completedRaces ? completedRaces.reduce((a, b) => Object.assign({ miles: a.miles + b.miles })) : 0;
+    const totalMiles = completedRaces.length ? completedRaces.reduce((a, b) => Object.assign({ miles: a.miles + b.miles })) : 0;
 
     return {
       completedRaces,
