@@ -2,7 +2,7 @@ const should = require('should');
 const HomeController = require('../controllers/HomeController');
 
 // Constants
-const publicConfig = require('../config/globals')[process.env.NODE_ENV || 'development'];
+const publicConfig = require('../config/globals')[process.env.NODE_ENV];
 const privateConfig = require('../config/private');
 
 describe('Home Controller', () => {

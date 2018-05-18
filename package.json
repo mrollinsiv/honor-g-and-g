@@ -7,8 +7,8 @@
     "start": "NODE_ENV=development nodemon -e js,twig,json,html app",
     "lint": "eslint **/*.js",
     "pretest": "npm run lint",
-    "test": "mocha --reporter dot --exit",
-    "coverage": "nyc --reporter text npm test"
+    "test": "NODE_ENV=development mocha --reporter dot --exit",
+    "coverage": "NODE_ENV=development nyc npm test --reporter=none"
   },
   "repository": {
     "type": "git",
