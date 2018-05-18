@@ -39,7 +39,7 @@ class HomeController {
         completedRaces: raceData.completedRaces,
         upcomingRaces: raceData.upcomingRaces,
       },
-      totalMiles: raceData.totalMiles.miles.toFixed(1),
+      totalMiles: raceData.totalMiles.miles ? raceData.totalMiles.miles.toFixed(1) : 0,
       instaPics: instaPics.value,
       thankYou,
     });
@@ -53,7 +53,7 @@ class HomeController {
     // Get race data
     let races = await db.Data.findOne({ where: { key: 'races' } });
     if (!races) {
-      races = await db.Data.create({ key: 'races' });
+      races = await db.Data.create({ key: 'races', value: [] });
     }
 
     // Races are deemed complete at 10am EST
@@ -67,7 +67,7 @@ class HomeController {
     });
 
     // Reduce the completed races to generate the total mileage
-    const totalMiles = completedRaces ? completedRaces.reduce((a, b) => Object.assign({ miles: a.miles + b.miles })) : 0;
+    const totalMiles = completedRaces.length ? completedRaces.reduce((a, b) => Object.assign({ miles: a.miles + b.miles })) : 0;
 
     return {
       completedRaces,
@@ -80,11 +80,11 @@ class HomeController {
     // Get fundraising data
     let fundraisingData = await db.Data.findOne({ where: { key: 'fundraising_data' } });
     if (!fundraisingData) {
-      fundraisingData = await db.Data.create({ key: 'fundraising_data' });
+      fundraisingData = await db.Data.create({ key: 'fundraising_data', value: { donors: [], totalRaised: 0 } });
     }
 
     // Check if we need fresh data from JustGiving API
-    if (!fundraisingData.value || fundraisingData.updated_at < Date.now() - (300 * 1000) || thankYou) { // Update every 5 minutes
+    if (!Object.getOwnPropertyNames(fundraisingData.value).length || fundraisingData.updated_at < Date.now() - (300 * 1000) || thankYou) { // Update every 5 minutes
       // Load data from JustGiving API
       const donationOptions = {
         uri: `${ctx.state.globals.public.justGiving.uri}fundraising/pages/${ctx.state.globals.public.justGiving.shortname}/donations`,
@@ -112,7 +112,7 @@ class HomeController {
         donations = await request(donationOptions);
         fundraiser = await request(fundraiserOptions);
 
-        fundraisingData.update({
+        await fundraisingData.update({
           value: {
             donors: donations.donations.slice(0, 20).map(a => a.donorDisplayName),
             totalRaised: fundraiser.grandTotalRaisedExcludingGiftAid || 0,

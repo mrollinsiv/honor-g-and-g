@@ -2,3 +2,4 @@ config/db.json
 config/private.json
 node_modules
 web/assets/dist
+.nyc_output

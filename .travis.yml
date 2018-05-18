@@ -5,3 +5,12 @@ cache:
   directories:
     - node_modules
 sudo: false
+services:
+  - postgresql
+addons:
+  postgresql: "9.6"
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -U postgres travis_ci_test < /home/travis/build/mrollinsiv/honor-g-and-g/data/data.sql
+  - echo -e "{\"adapter\":\"postgres\",\"host\":\"127.0.0.1\",\"port\":\"5432\",\"user\":\"postgres\",\"password\":\"\",\"database\":\"travis_ci_test\"}" >> /home/travis/build/mrollinsiv/honor-g-and-g/config/db.json
+  - echo -e "{\"justGiving\":{\"apiKey\":\"$JUST_GIVING_API\"}}" >> /home/travis/build/mrollinsiv/honor-g-and-g/config/private.json
