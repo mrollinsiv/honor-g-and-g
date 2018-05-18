@@ -24,7 +24,7 @@ describe('Home Controller', () => {
     });
     should(fundraisingData).have.propertyByPath('value', 'donors');
     should(fundraisingData).have.propertyByPath('value', 'totalRaised');
-  });
+  }).timeout(6000);
 
   it('load fundraising data from API', async () => {
     const fundraisingData = await HomeController.getFundraisingData({
