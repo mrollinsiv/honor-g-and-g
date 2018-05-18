@@ -13,19 +13,6 @@ describe('Home Controller', () => {
     should(raceData).have.property('upcomingRaces');
   });
 
-  it('load fundraising data', async () => {
-    const fundraisingData = await HomeController.getFundraisingData({
-      state: {
-        globals: {
-          public: publicConfig,
-          private: privateConfig,
-        },
-      },
-    });
-    should(fundraisingData).have.propertyByPath('value', 'donors');
-    should(fundraisingData).have.propertyByPath('value', 'totalRaised');
-  }).timeout(6000);
-
   it('load fundraising data from API', async () => {
     const fundraisingData = await HomeController.getFundraisingData({
       state: {
@@ -38,5 +25,18 @@ describe('Home Controller', () => {
     should(fundraisingData).have.propertyByPath('value', 'donors');
     should(fundraisingData).have.propertyByPath('value', 'totalRaised');
   }).timeout(6000);
+
+  it('load fundraising data from DB', async () => {
+    const fundraisingData = await HomeController.getFundraisingData({
+      state: {
+        globals: {
+          public: publicConfig,
+          private: privateConfig,
+        },
+      },
+    });
+    should(fundraisingData).have.propertyByPath('value', 'donors');
+    should(fundraisingData).have.propertyByPath('value', 'totalRaised');
+  });
 });
 
