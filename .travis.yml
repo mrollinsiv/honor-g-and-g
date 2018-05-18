@@ -26,7 +26,7 @@ before_deploy:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: ssh -p22 $PRODUCTION_SERVER_USER@$PRODUCT_SERVER "/home/$PRODUCTION_SERVER_USER/honor-g-and-g/deploy.sh"
+    script: ssh -p22 $PRODUCTION_SERVER_USER@$PRODUCTION_SERVER "/home/$PRODUCTION_SERVER_USER/honor-g-and-g/deploy.sh"
     on:
       branch: master
 
