@@ -9,15 +9,14 @@ services:
 - postgresql
 addons:
   postgresql: '9.6'
-  ssh_known_hosts:
-    - $PRODUCTION_SERVER
+  ssh_known_hosts: $PRODUCTION_SERVER
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - psql -U postgres travis_ci_test < /home/travis/build/mrollinsiv/honor-g-and-g/data/data.sql
   - echo -e "{\"adapter\":\"postgres\",\"host\":\"127.0.0.1\",\"port\":\"5432\",\"user\":\"postgres\",\"password\":\"\",\"database\":\"travis_ci_test\"}"
     >> /home/travis/build/mrollinsiv/honor-g-and-g/config/db.json
   - echo -e "{\"justGiving\":{\"apiKey\":\"$JUST_GIVING_API\"}}" >> /home/travis/build/mrollinsiv/honor-g-and-g/config/private.json
-  - echo -e "Host $PRODUCTION_SERVERntStrictHostKeyChecking non" >> ~/.ssh/config
+  - echo -e "Host $PRODUCTION_SERVER\n\tStrictHostKeyChecking non" >> ~/.ssh/config
 before_deploy:
   - openssl aes-256-cbc -K $encrypted_77850813a3ad_key -iv $encrypted_77850813a3ad_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
   - eval "$(ssh-agent -s)"
