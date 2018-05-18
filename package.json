@@ -5,9 +5,10 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=development nodemon -e js,twig,json,html app",
-    "test": "No Tests",
     "lint": "eslint **/*.js",
-    "pretest": "npm run lint"
+    "pretest": "npm run lint",
+    "test": "mocha --reporter dot --exit",
+    "coverage": "nyc --reporter text npm test"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-mocha": "^5.0.0",
     "grunt": "^1.0.2",
     "grunt-browserify": "^5.2.0",
     "grunt-contrib-copy": "^1.0.0",
@@ -43,6 +45,9 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-nunjucks": "^0.1.4",
     "grunt-sass": "^2.1.0",
-    "pem": "^1.12.5"
+    "mocha": "^5.1.1",
+    "nyc": "^11.8.0",
+    "pem": "^1.12.5",
+    "should": "^13.2.1"
   }
 }
