@@ -80,7 +80,7 @@ class HomeController {
     // Get fundraising data
     let fundraisingData = await db.Data.findOne({ where: { key: 'fundraising_data' } });
     if (!fundraisingData) {
-      fundraisingData = await db.Data.create({ key: 'fundraising_data' });
+      fundraisingData = await db.Data.create({ key: 'fundraising_data', value: { donors: [], totalRaised: 0 } });
     }
 
     // Check if we need fresh data from JustGiving API
@@ -112,7 +112,7 @@ class HomeController {
         donations = await request(donationOptions);
         fundraiser = await request(fundraiserOptions);
 
-        fundraisingData.update({
+        await fundraisingData.update({
           value: {
             donors: donations.donations.slice(0, 20).map(a => a.donorDisplayName),
             totalRaised: fundraiser.grandTotalRaisedExcludingGiftAid || 0,
