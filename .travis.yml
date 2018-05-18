@@ -6,8 +6,4 @@ cache:
     - node_modules
 sudo: false
 before_script:
-  - echo -e '{
-                 "justGiving": {
-                   "apiKey": "$JUST_GIVING_API"
-                 }
-             }' >> ./config/private.json
+  - echo -e "{\"justGiving\":{\"apiKey\":\"$JUST_GIVING_API\"}}' >> ./config/private.json
