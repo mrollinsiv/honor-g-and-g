@@ -3,7 +3,7 @@ const db = require('../db/db');
 
 class HomeController {
   async index(ctx) {
-    const thankYou = typeof ctx.request.query.tyfyd !== 'undefined' && ctx.request.query.tyfyd === 1; // Flag if on response page, update donations
+    const thankYou = typeof ctx.request.query.tyfyd !== 'undefined' && ctx.request.query.tyfyd === '1'; // Flag if on response page, update donations
 
     // Load the fundraising data from DB or refresh from API
     const fundraisingData = await HomeController.getFundraisingData(ctx, thankYou);
